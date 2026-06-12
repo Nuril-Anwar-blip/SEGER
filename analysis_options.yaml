@@ -1,0 +1,10 @@
+# analysis_options.yaml
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    # Matikan beberapa rule yang terlalu strict untuk pemula
+    prefer_const_constructors: false
+    prefer_const_declarations: false
+    avoid_print: false
+    unnecessary_overrides: false
