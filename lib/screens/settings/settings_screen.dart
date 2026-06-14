@@ -96,7 +96,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ],
                     ),
                     const SizedBox(height: 36),
-                    // Delete data button
                     SizedBox(
                       width: double.infinity,
                       child: OutlinedButton.icon(
@@ -112,7 +111,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                     ),
                     const SizedBox(height: 24),
-                    const Text('GerakBisa v1.0.0', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF6D7A77))),
+                    const Text('SEGER v1.0.0', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF6D7A77))),
                   ],
                 ),
               ),
@@ -157,37 +156,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       child: Column(
         children: [
-          Stack(
-            children: [
-              Container(
-                width: 80, height: 80,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: const Color(0xFF00685D), width: 3),
-                ),
-                child: ClipOval(
-                  child: Image.network(
-                    'https://lh3.googleusercontent.com/aida-public/AB6AXuBhEI9urZ9dRxSaVfpzAtX6WAP72VhPOYtDRdvJJUNQkZwSLJfZAtPCTFpq6kzEaxoApDw0yGiyngW4jIZYHdKQHalOz23fv_0V7WoBA32Xv0NmjoZ7Af7cahW-sLUp54Gv5NAdW0Ugw-_MJ9KQH8LNLtq56lP-8RPwlzqF8kezWl_5LUQbudOC6VnJW5fw7OB2aY0wQW6js2Jgw4Pg9LDVJo6iXeBRYgN-XDqtkj86ZzxKYIQ6i9xLFY59jamNEeMLHNApSJ8nag4',
-                    fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => const Icon(Icons.person, size: 44, color: Color(0xFF00685D)),
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 0, right: 0,
-                child: Container(
-                  width: 24, height: 24,
-                  decoration: BoxDecoration(
-                    color: Colors.white, shape: BoxShape.circle,
-                    border: Border.all(color: const Color(0xFFDCE2F3)),
-                  ),
-                  child: const Icon(Icons.edit, size: 14, color: Color(0xFF00685D)),
-                ),
-              ),
-            ],
+          Container(
+            width: 80, height: 80,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: const Color(0xFF00685D), width: 3),
+            ),
+            child: const Icon(Icons.person, size: 44, color: Color(0xFF00685D)),
           ),
           const SizedBox(height: 12),
-          const Text('Dimas Pratama', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: Color(0xFF151C27))),
+          const Text('Profil Anak', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: Color(0xFF151C27))),
           const SizedBox(height: 8),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
@@ -197,7 +175,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               children: [
                 Icon(Icons.stars, size: 16, color: Color(0xFF00685D)),
                 SizedBox(width: 6),
-                Text('Autism Spectrum Disorder', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Color(0xFF00685D))),
+                Text('Profil aktif', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Color(0xFF00685D))),
               ],
             ),
           ),

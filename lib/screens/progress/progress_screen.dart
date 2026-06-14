@@ -79,7 +79,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
           ),
           const Expanded(
             child: Text(
-              'Progres Dimas',
+              'Progres',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: Color(0xFF00685D)),
             ),

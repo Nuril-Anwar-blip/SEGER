@@ -140,7 +140,7 @@ class _RewardScreenState extends State<RewardScreen> with TickerProviderStateMix
     child: Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
       decoration: BoxDecoration(color: Colors.white.withAlpha(77), borderRadius: BorderRadius.circular(999)),
-      child: const Text('Dimas berhasil menyelesaikan 5 gerakan!', textAlign: TextAlign.center,
+      child: const Text('Hebat, kamu berhasil menyelesaikan latihan!', textAlign: TextAlign.center,
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Color(0xFF281900), height: 1.5)),
     ),
   );

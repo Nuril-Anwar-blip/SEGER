@@ -1,24 +1,31 @@
 import 'package:flutter/material.dart';
+import '../../models/profil_anak.dart';
+import '../../services/hive_service.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final ProfilAnak? profil = HiveService.getCurrentProfil();
+    final namaAnak = profil?.nama ?? 'Adik';
+
     return Scaffold(
       backgroundColor: const Color(0xFFFAFAF8),
       body: SafeArea(
         child: Column(
           children: [
-            _buildTopAppBar(context),
+            _buildTopAppBar(context, namaAnak),
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(24, 24, 24, 24),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildHeroCard(context),
-                    const SizedBox(height: 32),
+                    _buildHeroCard(context, namaAnak),
+                    const SizedBox(height: 24),
+                    if (profil != null) _buildProfilCard(profil),
+                    if (profil != null) const SizedBox(height: 32),
                     _buildSessionSection(context),
                   ],
                 ),
@@ -30,7 +37,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTopAppBar(BuildContext context) {
+  Widget _buildTopAppBar(BuildContext context, String nama) {
     return Container(
       color: const Color(0xFFF0F3FF),
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
@@ -43,21 +50,15 @@ class HomeScreen extends StatelessWidget {
               shape: BoxShape.circle,
               border: Border.all(color: const Color(0xFF00897B), width: 4),
             ),
-            child: ClipOval(
-              child: Image.network(
-                'https://lh3.googleusercontent.com/aida-public/AB6AXuDYhONgjrx4mlGGWOEyFo6nMKBKmCnc-2HYN1SB3QK9LB7-ZZx_vpF_ub3q29ntQ6WoP1ie5x4642ebK4qEU2bkLFysGTpTPq9T9dLtOjAuwIYXBvPJq16uVsJk2MM_gawp8q3iu2KAeeUu4J2D1ybZ3B3HBMZRgfngGWEOnRMNCcK8uCUmyXKbWlMgDjZYopyR7fvnXVds5geQITHU8pob-8A7SFwQ1P6ti37Bu__iBF7YU7xwceAL3kOGwE3mbiS_CC5bVm0oYao',
-                fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) => const Icon(Icons.person, color: Color(0xFF00897B), size: 28),
-              ),
-            ),
+            child: const Icon(Icons.person, color: Color(0xFF00897B), size: 28),
           ),
           const SizedBox(width: 16),
-          const Expanded(
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Dimas', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: Color(0xFF1A2B4A))),
-                Text('Selamat datang!', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xFF3D4946))),
+                Text(nama, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: Color(0xFF1A2B4A))),
+                const Text('Selamat datang!', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Color(0xFF3D4946))),
               ],
             ),
           ),
@@ -72,11 +73,11 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHeroCard(BuildContext context) {
+  Widget _buildHeroCard(BuildContext context, String nama) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(32),
-      constraints: const BoxConstraints(minHeight: 280),
+      constraints: const BoxConstraints(minHeight: 240),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           begin: Alignment.topCenter,
@@ -88,16 +89,35 @@ class HomeScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Image.network(
-            'https://lh3.googleusercontent.com/aida-public/AB6AXuDdl_fPg1hcjtoXM84Kerdx4-wu5m20wmvohZuMxvRUotGkmYFXYrfI07TJhC_eS1dCOc5jcTOi4q5tvFuLZBoifwH1LNI0fHGyUro_U4m83TiG4lBbmJfkNLPQO5KfOLzpvGrxdiZuqClQO-J0nRPh6QBhyl5h1VoU38cFDNHiq6v7stxwuhth0VX3650bQiWzkp1gBF1kfR9HRzVOYyCEPUAMfhS9H8IpSq1b2AWM3woNQYaGa7plwozYmcEZakuCosywUp5Rgfs',
-            height: 180,
-            fit: BoxFit.contain,
-            errorBuilder: (_, __, ___) => const Icon(Icons.child_care, size: 120, color: Color(0xFF00897B)),
-          ),
+          const Icon(Icons.child_care, size: 100, color: Color(0xFF00897B)),
           const SizedBox(height: 16),
-          const Text('Halo, Dimas!', style: TextStyle(fontSize: 28, fontWeight: FontWeight.w700, color: Color(0xFF1A2B4A))),
+          Text('Halo, $nama!', style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w700, color: Color(0xFF1A2B4A))),
           const SizedBox(height: 8),
           const Text('Siap bergerak hari ini?', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Color(0xFF00897B))),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildProfilCard(ProfilAnak profil) {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.blue.shade50,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Profil Anak', style: TextStyle(fontSize: 16)),
+          const SizedBox(height: 12),
+          Text(
+            profil.nama,
+            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          Text('Kondisi: ${profil.kondisi}'),
+          Text('Usia: ${profil.usia} tahun'),
         ],
       ),
     );
@@ -120,6 +140,20 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 12),
           child: _SessionCard(item: s),
         )),
+        const SizedBox(height: 24),
+        SizedBox(
+          width: double.infinity,
+          height: 60,
+          child: ElevatedButton(
+            onPressed: () => Navigator.pushNamed(context, '/exercise'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF00685D),
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+            ),
+            child: const Text('Mulai Latihan Sekarang', style: TextStyle(fontSize: 18)),
+          ),
+        ),
       ],
     );
   }
@@ -160,7 +194,7 @@ class _SessionCard extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           ElevatedButton(
-            onPressed: () => Navigator.pushNamed(context, '/reward'),
+            onPressed: () => Navigator.pushNamed(context, '/exercise'),
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF00897B), foregroundColor: Colors.white,
               minimumSize: const Size(0, 56), padding: const EdgeInsets.symmetric(horizontal: 20),
