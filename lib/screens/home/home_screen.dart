@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../models/profil_anak.dart';
 import '../../services/hive_service.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -75,7 +74,9 @@ class HomeScreen extends ConsumerWidget {
               width: double.infinity,
               height: 60,
               child: OutlinedButton(
-                onPressed: () {
+                onPressed: () async {
+                  await HiveService.clearProfil();
+                  if (!context.mounted) return;
                   Navigator.pushReplacementNamed(context, '/');
                 },
                 child: const Text('Ganti Profil', style: TextStyle(fontSize: 18)),

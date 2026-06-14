@@ -97,8 +97,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                   );
 
                   await HiveService.saveProfil(profil);
-                  print('✅ Profil disimpan: ${profil.nama}, ${profil.usia} tahun');
+                  debugPrint('✅ Profil disimpan: ${profil.nama}, ${profil.usia} tahun');
 
+                  if (!context.mounted) return;
                   Navigator.pushReplacementNamed(context, '/home');
                 },
                 child: const Text('Mulai Latihan', style: TextStyle(fontSize: 18)),
