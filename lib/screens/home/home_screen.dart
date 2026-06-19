@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import '../../models/profil_anak.dart';
+=======
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+>>>>>>> origin/fitur-rive-iqbal
 import '../../services/hive_service.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -28,7 +32,39 @@ class HomeScreen extends StatelessWidget {
                     if (profil != null) const SizedBox(height: 32),
                     _buildSessionSection(context),
                   ],
+<<<<<<< HEAD
                 ),
+=======
+                ],
+              ),
+            ),
+
+            const Spacer(),
+
+            SizedBox(
+              width: double.infinity,
+              height: 60,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/exercise');
+                },
+                child: const Text('Mulai Latihan Sekarang', style: TextStyle(fontSize: 18)),
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
+            SizedBox(
+              width: double.infinity,
+              height: 60,
+              child: OutlinedButton(
+                onPressed: () async {
+                  await HiveService.clearProfil();
+                  if (!context.mounted) return;
+                  Navigator.pushReplacementNamed(context, '/');
+                },
+                child: const Text('Ganti Profil', style: TextStyle(fontSize: 18)),
+>>>>>>> origin/fitur-rive-iqbal
               ),
             ),
           ],

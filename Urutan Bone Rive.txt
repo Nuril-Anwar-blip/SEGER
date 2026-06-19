@@ -1,0 +1,32 @@
+﻿# ==========================================
+# SEGER RIVE RUNTIME BONE MAPPING DICTIONARY
+# ==========================================
+
+[ROTATION_BONES]
+# Format -> Rive_Bone_Name : Target_Landmark_Angle
+atas_kaki_kanan     : rightKnee_to_rightAnkle_angle
+atas_kaki_kiri      : leftKnee_to_leftAnkle_angle
+atas_tangan_kanan   : rightShoulder_to_rightElbow
+bawah_tangan_kanan  : rightElbow_to_rightWrist
+atas_tangan_kiri    : leftShoulder_to_leftElbow
+bawah_tangan_kiri   : leftElbow_to_leftWrist
+
+[TRANSLATION_NODES]
+# Format -> Rive_Node_Name : Target_Landmark_Position
+bawah_kaki_kanan    : rightAnkle_translation
+bawah_kaki_kiri     : leftAnkle_translation
+pinggang            : leftHip_rightHip_midpoint
+Kepala              : nose_head_estimate
+
+[HIERARCHY_TREE]
+Root_Level:
+  - bawah_kaki_kanan
+  - bawah_kaki_kiri
+  - grup_VectorKelinci:
+      - atas_kaki_kanan
+      - atas_kaki_kiri
+      - pinggang
+      - Kepala
+  - Group_Tangan:
+      - atas_tangan_kiri -> bawah_tangan_kiri
+      - atas_tangan_kanan -> bawah_tangan_kanan

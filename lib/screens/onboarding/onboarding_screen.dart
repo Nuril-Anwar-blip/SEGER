@@ -98,6 +98,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               width: double.infinity,
               height: 56,
               child: ElevatedButton(
+<<<<<<< HEAD
                 onPressed: _next,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
@@ -105,6 +106,32 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   shape: const StadiumBorder(),
                 ),
                 child: const Text('Lanjut', style: TextStyle(fontSize: 18)),
+=======
+                onPressed: () async {
+                  if (_namaController.text.trim().isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Nama anak tidak boleh kosong')),
+                    );
+                    return;
+                  }
+
+                  final usia = int.tryParse(_usiaController.text) ?? 8;
+
+                  final profil = ProfilAnak(
+                    id: DateTime.now().millisecondsSinceEpoch.toString(),
+                    nama: _namaController.text.trim(),
+                    kondisi: _selectedKondisi,
+                    usia: usia,
+                  );
+
+                  await HiveService.saveProfil(profil);
+                  debugPrint('✅ Profil disimpan: ${profil.nama}, ${profil.usia} tahun');
+
+                  if (!context.mounted) return;
+                  Navigator.pushReplacementNamed(context, '/home');
+                },
+                child: const Text('Mulai Latihan', style: TextStyle(fontSize: 18)),
+>>>>>>> origin/fitur-rive-iqbal
               ),
             ),
           ],
